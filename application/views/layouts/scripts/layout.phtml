@@ -25,11 +25,12 @@
                 <span class="icon-bar"></span>
             </a>
 
-            <a class="brand" href="#">nomobu</a>
+            <a class="brand" href="<?=$this->baseUrl();?>">nomobu</a>
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="<?php if(Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == 'projects') { echo 'active'; }?>"><a href="<?=$this->baseUrl();?>/projects">Projects</a></li>
+                    <li class="<?php if(Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == 'users') { echo 'active'; }?>"><a href="<?=$this->baseUrl();?>/users">Users</a></li>
                     <li class="<?php if(Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == 'states') { echo 'active'; }?>"><a href="<?=$this->baseUrl();?>/states">States</a></li>
                     <li class="<?php if(Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == 'tickets') { echo 'active'; }?>"><a href="<?=$this->baseUrl();?>/tickets">Tickets</a></li>
                 </ul>

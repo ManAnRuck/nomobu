@@ -11,7 +11,17 @@ class TicketsController extends CD_Controller_Admin {
     protected $_itemClass = 'Application_Model_Ticket';
 
     public function viewAction() {
+        $item = new Application_Model_Ticket($this->getRequest()->getParam('id'));
 
+        $usersModel = new Application_Model_User();
+        $users = $usersModel->getMapper()->fetchAll();
+        $this->view->users = $users;
+
+        $statesModel = new Application_Model_Status();
+        $states = $statesModel->getMapper()->fetchAll();
+        $this->view->states = $states;
+
+        $this->view->item = $item;
     }
 
     public function editAction() {

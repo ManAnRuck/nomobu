@@ -1,6 +1,84 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
+            <h2><?=$this->item?></h2>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span9">
+            <div class="well well-small">
+                <?=$this->item->description?>
+            </div>
+        </div>
+
+        <div class="span3">
+            <ul class="ticketinfo">
+                <li>
+                    <dl>
+                        <dt>Project:</dt>
+                        <dd><?=$this->item->getProject()?></dd>
+                    </dl>
+                </li>
+
+                <li>
+                    <dl>
+                        <dt>State:</dt>
+                        <dd><?=$this->item->getState()?>
+                            <a href="#" data-toggle="dropdown"><i class="icon-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <?php
+                                    foreach($this->states as $state) {
+                                        ?><li><a href="<?=$this->baseUrl();?>/tickets/id/<?=$this->item->id?>/setState/<?=$state->id?>"><?=$state?></a></li><?php
+                                    }
+                                ?>
+                            </ul>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li>
+                    <dl>
+                        <dt>Author:</dt>
+                        <dd><?=$this->item->getAuthor()?></dd>
+                    </dl>
+                </li>
+
+                <li>
+                    <dl>
+                        <dt>Attached to:</dt>
+                        <dd>
+                            <?=$this->item->getAttachedTo()?>
+                            <a href="#" data-toggle="dropdown"><i class="icon-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <?php
+                                    foreach($this->users as $user) {
+                                        ?><li><a href="<?=$this->baseUrl();?>/tickets/id/<?=$this->item->id?>/attachTo/<?=$user->id?>"><?=$user?></a></li><?php
+                                    }
+                                ?>
+                                <li class="divider"></li>
+                                <li><a href="#">Mir zuweisen</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li>
+                    <dl>
+                        <dt>Last Updt.:</dt>
+                        <dd>10. Februar 1984, 09:06 Uhr</dd>
+                    </dl>
+                </li>
+            </ul>
+
+            <a class="btn btn-primary pull-right" href="#">Update »</a>
+        </div>
+    </div>
+
+    <hr>
+    <div class="row-fluid">
+        <div class="span12">
+            <a class="btn btn-primary pull-right" href="#">Update »</a>
         </div>
     </div>
 </div>

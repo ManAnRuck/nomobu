@@ -21,3 +21,28 @@ td.main {
 tr.fadeout td.main {
     text-decoration: line-through;
 }
+
+ul.ticketinfo {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    margin-bottom: 20px;
+}
+
+ul.ticketinfo li dl {
+    margin-bottom: 0;
+}
+
+ul.ticketinfo li dl dt,
+ul.ticketinfo li dl dd
+{
+    display:inline-block;
+}
+
+ul.ticketinfo li dl dt {
+    min-width: 100px;
+}
+
+ul.ticketinfo li dl dd {
+    position:relative;
+}

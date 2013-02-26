@@ -19,6 +19,24 @@ class Application_Model_Ticket extends CD_Model {
 
     protected $_foreignKeys = array(
         'states_id'         =>  'Application_Model_Status',
-        'projects_id'       =>  'Application_Model_Project'
+        'projects_id'       =>  'Application_Model_Project',
+        'author'            =>  'Application_Model_User',
+        'attached_to'       =>  'Application_Model_User'
     );
+
+    public function getProject() {
+        return new Application_Model_Project($this->projects_id);
+    }
+
+    public function getState() {
+        return new Application_Model_Status($this->states_id);
+    }
+
+    public function getAuthor() {
+        return new Application_Model_User($this->author);
+    }
+
+    public function getAttachedTo() {
+        return new Application_Model_User($this->attached_to);
+    }
 }
