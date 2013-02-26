@@ -1,0 +1,23 @@
+th.tiny {
+    width:1%;
+}
+
+th.small {
+    width:10%;
+}
+
+th.normal {
+    width:20%;
+}
+
+td.main {
+    font-weight: bold;
+}
+
+.fadeout {
+    opacity:0.5;
+}
+
+tr.fadeout td.main {
+    text-decoration: line-through;
+}

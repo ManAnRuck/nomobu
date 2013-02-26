@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <?php
+            if(count(CD_Message_Center::getInstance()->getMessages()) > 0) {
+                echo CD_Message_Center::getInstance()->flush();
+            }
+            ?>
+
+            <?=CD_Form_Renderer::render($this->form)?>
+
+            <!--
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">Thema</label>
+                    <div class="controls">
+                        <select class="input-block-level">
+                            <option>Thema auswählen</option>
+                            <option>Neues Thema</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">Artikel</label>
+                    <div class="controls">
+                        <textarea type="text" rows="10" id="inputEmail" placeholder="Email" class="input-block-level"></textarea>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn">Speichern »</button>
+                        <button type="submit" class="btn btn-info">Speichern &amp; Vorschau »</button>
+                        <button type="submit" class="btn btn-primary">Speichern &amp; Weiter »</button>
+                    </div>
+                </div>
+            </form>
+            -->
+        </div>
+    </div>
+
+    <?php
+        if($this->item->id AND $this->item->id != '' && 1==0) {
+            ?>
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3>Themen</h3>
+                    <table class="table table-striped table-condensed table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <!--th>
+                                Veröffentlichung
+                            </th-->
+                            <th>
+                                Themenname
+                            </th>
+                            <th>
+                                Aktionen
+                            </th>
+                        </tr>
+                        </thead>
+                        <?php
+                        if(count($this->item->getTopics()) > 0) {
+                            ?>
+                            <tbody>
+                                <?php
+                                /** @var $item Application_Model_Topic */
+                                foreach($this->item->getTopics() as $subitem) {
+                                    ?>
+                                <tr>
+                                    <td>
+                                        <?=$subitem->id?>
+                                    </td>
+                                    <!--td>
+                                        <span class="label label-success">Veröffentlicht</span>
+                                    </td-->
+                                    <td>
+                                        <a href="<?=$this->baseUrl();?>/topics/edit/id/<?=$subitem->id?>"><?=$subitem?></a>
+                                    </td>
+                                    <td>
+                                        <a href="<?=$this->baseUrl();?>/topics/edit/id/<?=$subitem->id?>"><i class="icon-edit"></i></a>
+                                        <a href="<?=$this->baseUrl();?>/topics/deactivate/id/<?=$subitem->id?>"><i class="icon-off"></i></a>
+                                    </td>
+                                </tr>
+                                    <?php
+                                }
+                                ?>
+                            </tbody>
+                            <?php
+                        }
+                        ?>
+                    </table>
+
+                </div>
+            </div>
+            <div class="well well-small clearfix">
+                <a class="btn btn-primary pull-right" href="<?=$this->baseUrl();?>/topics/add/for/<?=$this->item->id?>">Thema hinzufügen »</a>
+            </div>
+            <?php
+        }
+    ?>
+</div>

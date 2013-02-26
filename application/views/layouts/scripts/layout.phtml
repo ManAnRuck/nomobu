@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>nomobu</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="<?=$this->baseUrl();?>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?=$this->baseUrl();?>/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="<?=$this->baseUrl();?>/css/nomobu.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="<?=$this->baseUrl();?>/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="#">nomobu</a>
+
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="<?php if(Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == 'projects') { echo 'active'; }?>"><a href="<?=$this->baseUrl();?>/projects">Projects</a></li>
+                    <li class="<?php if(Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == 'states') { echo 'active'; }?>"><a href="<?=$this->baseUrl();?>/states">States</a></li>
+                    <li class="<?php if(Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == 'tickets') { echo 'active'; }?>"><a href="<?=$this->baseUrl();?>/tickets">Tickets</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<?php echo $this->layout()->content ?>
+
+<script type="text/javascript" src="<?=$this->baseUrl();?>/js/jquery.js"></script>
+<script type="text/javascript" src="<?=$this->baseUrl();?>/js/bootstrap.min.js"></script>
+</body>
+</html>
