@@ -21,6 +21,9 @@
                         <th class="main">
                             Name
                         </th>
+                        <th class="medium">
+                            Last Update
+                        </th>
                         <th class="tiny">
                             Actions
                         </th>
@@ -43,6 +46,9 @@
                                             </td>
                                             <td>
                                                 <a href="<?=$this->baseUrl();?>/<?=Zend_Controller_Front::getInstance()->getRequest()->getControllerName()?>/view/id/<?=$item->id?>"><?=$item?></a>
+                                            </td>
+                                            <td>
+                                                <?=date('d.m.Y, H:i:s', $item->getUpdatedAsTimestamp())?>
                                             </td>
                                             <td>
                                                 <a href="<?=$this->baseUrl();?>/<?=Zend_Controller_Front::getInstance()->getRequest()->getControllerName()?>/view/id/<?=$item->id?>"><i class="icon-eye-open"></i></a>
