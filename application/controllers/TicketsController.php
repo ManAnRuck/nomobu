@@ -62,6 +62,9 @@ class TicketsController extends CD_Controller_Admin {
 
         if($state->closes) return $this->forward('list');
         return $this->forward('view', null, null, array('id' => $this->getParam('id')));
+    }
 
+    public function deactivateAction() {
+        return $this->forward('list');
     }
 }
