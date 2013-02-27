@@ -28,4 +28,23 @@ class TicketsController extends CD_Controller_Admin {
         if($this->getRequest()->getParam('id')) return $this->forward('view');
         parent::editAction();
     }
+
+    public function setstateAction() {
+        $ticket = new Application_Model_Ticket($this->getRequest()->getParam('id'));
+        if(!$ticket->id) throw new Exception('Ticket not found');
+
+        $state = new Application_Model_Status($this->getRequest()->getParam('stateId'));
+        if(!$state->id) throw new Exception('State not found');
+
+        $update = new Application_Model_Update();
+        $update->tickets_id = $ticket->id;
+        $update->states_id = $state->id;
+
+        $update->save();
+
+        CD_Message_Center::getInstance()->addMessage(new CD_Message_Success('<span>'.$ticket->__toString().'</span> updated'));
+
+        return $this->forward('view', null, null, array('id' => $this->getParam('id')));
+
+    }
 }
