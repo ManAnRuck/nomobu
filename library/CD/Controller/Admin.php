@@ -69,7 +69,12 @@ class CD_Controller_Admin extends Zend_Controller_Action {
                 try {
                     $item->save();
                     CD_Message_Center::getInstance()->addMessage(new CD_Message_Success('<strong>'. $item. '</strong> saved'));
-                    $this->forward('list');
+                    return $this->forward(
+                        $this->forwardActionOnSaveSuccess(),
+                        $this->forwardControllerOnSaveSuccess(),
+                        $this->forwardModuleOnSaveSuccess(),
+                        $this->forwardParamsOnSaveSuccess()
+                    );
                 } catch(Exception $e) {
                     CD_Message_Center::getInstance()->addMessage(new CD_Message_Error('Save error: '. $e->getMessage()));
                 }
@@ -100,5 +105,21 @@ class CD_Controller_Admin extends Zend_Controller_Action {
 
     public function deactivateAction() {
         $this->forward('delete');
+    }
+
+    public function forwardActionOnSaveSuccess() {
+        return 'list';
+    }
+
+    public function forwardControllerOnSaveSuccess() {
+        return null;
+    }
+
+    public function forwardModuleOnSaveSuccess() {
+        return null;
+    }
+
+    public function forwardParamsOnSaveSuccess() {
+        return null;
     }
 }

@@ -23,9 +23,14 @@ class CD_Model {
     protected $_mapper = null;
 
     /**
-     * @var array Array with keys who will be ignored for forms
+     * @var array Array with keys which will be ignored while saving
      */
-    protected $_ignoreKeys = array('id', 'urlshortcut');
+    protected $_ignoreKeys = array('id');
+
+    /**
+     * @var array Array with keys which will be ignored while generating form
+     */
+    protected $_ignoreInForms = array('updated');
 
     /**
      * @var array Fieldname mapper
@@ -76,10 +81,14 @@ class CD_Model {
     public function save() {
     	$data = array();
     	foreach($this as $key => $value) {
-    		if(substr($key, 0, 1) != '_' AND !in_array($key, $this->_ignoreKeys)) {
+    		if(substr($key, 0, 1) != '_' AND !in_array($key, $this->getIgnoreKeys())) {
     			$data[$key] = $value;		
     		}
     	}
+
+        if($this->_hasUpdate()) {
+            $data['updated'] = date('Y-m-d H:i:s');
+        }
 
     	if($this->id AND $this->id !== null AND $this->id != '') {
     		$this->getMapper()->getTable()->update($data, array('id = ?' => $this->id));
@@ -114,7 +123,7 @@ class CD_Model {
         // die();
 
         foreach($this->getMapper()->getTable()->info(Zend_Db_Table_Abstract::COLS) as $id => $key) {
-            if(!in_array($key, $this->_ignoreKeys) AND substr($key, 0, 1) != '_') {
+            if(!in_array($key, $this->getFormIgnoreKeys()) AND !in_array($key, $this->getIgnoreKeys()) AND substr($key, 0, 1) != '_') {
                 $label = $key;
                 $required = false;
                 if(isset($this->_fieldLabels[$key])) $label = $this->_fieldLabels[$key];
@@ -169,5 +178,44 @@ class CD_Model {
         )));
 
         return $form;
+    }
+
+    /**
+     * @return bool Has this model an updated field
+     */
+    protected function _hasUpdate() {
+        return $this->_hasField('updated');
+    }
+
+    /**
+     * Checks whether the model has a fieldname
+     *
+     * @param $fieldname
+     * @return bool
+     */
+    protected function _hasField($fieldname) {
+        $arr = $this->getMapper()->getTable()->info(Zend_Db_Table_Abstract::COLS);
+        return in_array($fieldname, $arr);
+    }
+
+    /**
+     * Returns the keys to ignore while saving
+     * @return array
+     */
+    public function getIgnoreKeys() {
+        return $this->_ignoreKeys;
+    }
+
+    /**
+     * Returns the keys to ignore while generating a form
+     * @return array
+     */
+    public function getFormIgnoreKeys() {
+        return $this->_ignoreInForms;
+    }
+
+    public function getUpdatedAsTimestamp() {
+        if($this->_hasUpdate()) return strtotime($this->updated);
+        return null;
     }
 }

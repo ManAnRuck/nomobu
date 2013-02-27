@@ -1,6 +1,12 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
+            <?php
+                if(count(CD_Message_Center::getInstance()->getMessages()) > 0) {
+                    echo CD_Message_Center::getInstance()->flush();
+                }
+            ?>
+
             <h2><?=$this->item?></h2>
         </div>
     </div>
@@ -66,19 +72,65 @@
                 <li>
                     <dl>
                         <dt>Last Updt.:</dt>
-                        <dd>10. Februar 1984, 09:06 Uhr</dd>
+                        <dd><?=date('d.m.Y, H:i:s', $this->item->getUpdatedAsTimestamp())?></dd>
                     </dl>
                 </li>
             </ul>
 
-            <a class="btn btn-primary pull-right" href="#">Update »</a>
+            <a class="btn btn-primary pull-right" href="<?=$this->baseUrl();?>/updates/add/for/<?=$this->item->id?>">Update »</a>
         </div>
     </div>
+
+
+    <?php
+        if($this->item->id AND count($this->item->getUpdates()) > 0) {
+            foreach($this->item->getUpdates() as $update) {
+                ?>
+                <hr>
+                <div class="row-fluid">
+                    <div class="span9">
+                        <div class="well well-small">
+                            <?=$update->description?>
+                        </div>
+                    </div>
+
+                    <div class="span3">
+                        <ul class="ticketinfo">
+                            <li>
+                                <dl>
+                                    <dt>Autor:</dt>
+                                    <dd>Cem Derin</dd>
+                                </dl>
+                            </li>
+
+                            <li>
+                                <dl>
+                                    <dt>State:</dt>
+                                    <dd><?=$update->getState()?></dd>
+                                </dl>
+                            </li>
+
+                            <li>
+                                <dl>
+                                    <dt>Update:</dt>
+                                    <dd><?=date('d.m.Y, H:i:s', $update->getUpdatedAsTimestamp())?></dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <?php
+            }
+        }
+    ?>
+
+
+
 
     <hr>
     <div class="row-fluid">
         <div class="span12">
-            <a class="btn btn-primary pull-right" href="#">Update »</a>
+            <a class="btn btn-primary pull-right" href="<?=$this->baseUrl();?>/updates/add/for/<?=$this->item->id?>">Update »</a>
         </div>
     </div>
 </div>

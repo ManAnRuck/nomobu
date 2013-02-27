@@ -29,7 +29,10 @@ class Application_Model_Ticket extends CD_Model {
     }
 
     public function getState() {
-        return new Application_Model_Status($this->states_id);
+        if(count($this->getUpdates()) <= 0) return new Application_Model_Status($this->states_id);
+        $updates = $this->getUpdates();
+        $updates = array_reverse($updates);
+        return $updates[0]->getState();
     }
 
     public function getAuthor() {
@@ -38,5 +41,17 @@ class Application_Model_Ticket extends CD_Model {
 
     public function getAttachedTo() {
         return new Application_Model_User($this->attached_to);
+    }
+
+    public function getUpdates() {
+        $updateModel = new Application_Model_Update();
+        return $updateModel->getMapper()->fetchAll(array('tickets_id = ?' => $this->id));
+    }
+
+    public function getUpdatedAsTimestamp() {
+        if(count($this->getUpdates()) <= 0) return parent::getUpdatedAsTimestamp();
+        $updates = $this->getUpdates();
+        $updates = array_reverse($updates);
+        return $updates[0]->getUpdatedAsTimestamp();
     }
 }
