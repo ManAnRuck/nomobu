@@ -10,6 +10,22 @@
 class TicketsController extends CD_Controller_Admin {
     protected $_itemClass = 'Application_Model_Ticket';
 
+    public function listAction() {
+        $modelClass = $this->_itemClass;
+        $model = new $modelClass;
+        $mapper = $model->getMapper();
+        $items = $mapper->fetchAll();
+        usort($items, array($this, 'sortTickets'));
+        $this->view->items = $items;
+    }
+
+    public function sortTickets(Application_Model_Ticket $a, Application_Model_Ticket $b) {
+        if($a->getState()->closes < $b->getState()->closes) return -1;
+        if($a->getState()->closes > $b->getState()->closes) return 1;
+
+        return 0;
+    }
+
     public function viewAction() {
         $item = new Application_Model_Ticket($this->getRequest()->getParam('id'));
 
