@@ -44,6 +44,7 @@ class TicketsController extends CD_Controller_Admin {
 
         CD_Message_Center::getInstance()->addMessage(new CD_Message_Success('<span>'.$ticket->__toString().'</span> updated'));
 
+        if($state->closes) return $this->forward('list');
         return $this->forward('view', null, null, array('id' => $this->getParam('id')));
 
     }
