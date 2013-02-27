@@ -15,6 +15,9 @@
                         <th class="tiny">
                             #
                         </th>
+                        <th class="tiny">
+                            State
+                        </th>
                         <th class="main">
                             Name
                         </th>
@@ -31,9 +34,12 @@
                                 /** @var $item Application_Model_Article */
                                 foreach($this->items as $item) {
                                     ?>
-                                        <tr>
+                                        <tr class="<?php if($item->getState()->closes == 1) { echo 'fadeout'; } ?>">
                                             <td>
                                                 <?=$item->id?>
+                                            </td>
+                                            <td>
+                                                <?=$item->getState()?>
                                             </td>
                                             <td>
                                                 <a href="<?=$this->baseUrl();?>/<?=Zend_Controller_Front::getInstance()->getRequest()->getControllerName()?>/view/id/<?=$item->id?>"><?=$item?></a>
