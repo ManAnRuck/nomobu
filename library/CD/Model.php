@@ -161,6 +161,13 @@ class CD_Model {
                         'required'  =>  $required,
                         'multiOptions'   =>  $options
                     )));
+                } elseif($metadata[$key]['DATA_TYPE'] == 'smallint') {
+                    $form->addElement(new Zend_Form_Element_Checkbox(array(
+                        'name'      =>  $key,
+                        'value'     =>  $this->{$key},
+                        'label'     =>  $label,
+                        'required'  =>  $required
+                    )));
                 } else {
                     $form->addElement(new Zend_Form_Element_Text(array(
                         'name'      =>  $key,

@@ -71,6 +71,12 @@ class CD_Form_Renderer {
                               });
                         </script>";
 
+        } elseif($element->getType() == 'Zend_Form_Element_Checkbox') {
+            $checked = '';
+            if($element->getValue() == '1') {
+                $checked = 'checked="checked"';
+            }
+            return '<input type="hidden" name="'.$element->getName().'" value="0"><input type="checkbox" '. self::renderAttributes($element).' value="1" '.$checked.'>';
         }
         return $return;
     }
