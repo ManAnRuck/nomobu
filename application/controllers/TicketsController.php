@@ -23,6 +23,9 @@ class TicketsController extends CD_Controller_Admin {
         if($a->getState()->closes < $b->getState()->closes) return -1;
         if($a->getState()->closes > $b->getState()->closes) return 1;
 
+        if($a->getUpdatedAsTimestamp() > $b->getUpdatedAsTimestamp()) return -1;
+        if($a->getUpdatedAsTimestamp() < $b->getUpdatedAsTimestamp()) return 1;
+
         return 0;
     }
 
