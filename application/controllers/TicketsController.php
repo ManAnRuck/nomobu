@@ -58,7 +58,6 @@ class TicketsController extends CD_Controller_Admin {
         $update = new Application_Model_Update();
         $update->tickets_id = $ticket->id;
         $update->states_id = $state->id;
-
         $update->save();
 
         CD_Message_Center::getInstance()->addMessage(new CD_Message_Success('<strong>'.$ticket->__toString().'</strong> updated'));
@@ -69,5 +68,25 @@ class TicketsController extends CD_Controller_Admin {
 
     public function deactivateAction() {
         return $this->forward('list');
+    }
+
+    public function assignAction() {
+        $ticket = new Application_Model_Ticket($this->getRequest()->getParam('id'));
+        if(!$ticket->id) throw new Exception('Ticket not found');
+
+        if($this->getRequest()->getParam('userId') == 'me') {
+            throw new Exception('Cannot assign to self');
+        } else {
+            $user = new Application_Model_User($this->getRequest()->getParam('userId'));
+            if(!$user->id) throw new Exception('User not found');
+        }
+
+        $update = new Application_Model_Update();
+        $update->tickets_id = $ticket->id;
+        $update->attached_to = $user->id;
+        $update->save();
+
+        CD_Message_Center::getInstance()->addMessage(new CD_Message_Success('<strong>'.$ticket->__toString().'</strong> updated'));
+        $this->forward('list');
     }
 }

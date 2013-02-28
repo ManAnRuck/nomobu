@@ -11,7 +11,8 @@ class Application_Model_Update extends CD_Model {
     protected $_tableName = 'updates';
 
     protected $_foreignKeys = array(
-        'states_id'         =>  'Application_Model_Status'
+        'states_id'         =>  'Application_Model_Status',
+        'attached_to'       =>  'Application_Model_User'
     );
 
     public function getFormIgnoreKeys() {
@@ -33,5 +34,9 @@ class Application_Model_Update extends CD_Model {
 
     public function getDescriptionParsed() {
         return nl2br($this->description);
+    }
+
+    public function getAttachedTo() {
+        return new Application_Model_User($this->attached_to);
     }
 }

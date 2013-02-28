@@ -59,7 +59,7 @@
                             <ul class="dropdown-menu">
                                 <?php
                                     foreach($this->users as $user) {
-                                        ?><li><a href="<?=$this->baseUrl();?>/tickets/id/<?=$this->item->id?>/attachTo/<?=$user->id?>"><?=$user?></a></li><?php
+                                        ?><li><a href="<?=$this->baseUrl();?>/tickets/assign/id/<?=$this->item->id?>/userId/<?=$user->id?>"><?=$user?></a></li><?php
                                     }
                                 ?>
                                 <li class="divider"></li>

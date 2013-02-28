@@ -40,7 +40,10 @@ class Application_Model_Ticket extends CD_Model {
     }
 
     public function getAttachedTo() {
-        return new Application_Model_User($this->attached_to);
+        if(count($this->getUpdates()) <= 0) return new Application_Model_User($this->attached_to);
+        $updates = $this->getUpdates();
+        $updates = array_reverse($updates);
+        return $updates[0]->getAttachedTo();
     }
 
     public function getUpdates() {
