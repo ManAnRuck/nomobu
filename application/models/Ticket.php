@@ -29,10 +29,7 @@ class Application_Model_Ticket extends CD_Model {
     }
 
     public function getState() {
-        if(count($this->getUpdates()) <= 0) return new Application_Model_Status($this->states_id);
-        $updates = $this->getUpdates();
-        $updates = array_reverse($updates);
-        return $updates[0]->getState();
+        return new Application_Model_Status($this->states_id);
     }
 
     public function getAuthor() {
@@ -40,10 +37,7 @@ class Application_Model_Ticket extends CD_Model {
     }
 
     public function getAttachedTo() {
-        if(count($this->getUpdates()) <= 0) return new Application_Model_User($this->attached_to);
-        $updates = $this->getUpdates();
-        $updates = array_reverse($updates);
-        return $updates[0]->getAttachedTo();
+        return new Application_Model_User($this->attached_to);
     }
 
     public function getUpdates() {

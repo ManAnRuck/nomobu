@@ -103,12 +103,23 @@
                                 </dl>
                             </li>
 
+                            <?php if($update->getState()->id){ ?>
                             <li>
                                 <dl>
                                     <dt>State:</dt>
                                     <dd><?=$update->getState()?></dd>
                                 </dl>
                             </li>
+                            <?php } ?>
+
+                            <?php if($update->getAttachedTo()->id) { ?>
+                            <li>
+                                <dl>
+                                    <dt>Attached to:</dt>
+                                    <dd><?=$update->getAttachedTo()?></dd>
+                                </dl>
+                            </li>
+                            <?php } ?>
 
                             <li>
                                 <dl>
