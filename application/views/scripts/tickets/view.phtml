@@ -106,9 +106,15 @@
                                     <dd>Cem Derin</dd>
                                 </dl>
                             </li>
+                            <li>
+                                <dl>
+                                    <dt>Update:</dt>
+                                    <dd><?=date('d.m.Y, H:i:s', $update->getUpdatedAsTimestamp())?></dd>
+                                </dl>
+                            </li>
 
                             <?php if($update->getState()->id){ ?>
-                            <li>
+                            <li class="highlight">
                                 <dl>
                                     <dt>State:</dt>
                                     <dd><?=$update->getState()?></dd>
@@ -117,20 +123,13 @@
                             <?php } ?>
 
                             <?php if($update->getAttachedTo()->id) { ?>
-                            <li>
+                            <li class="highlight">
                                 <dl>
                                     <dt>Attached to:</dt>
                                     <dd><?=$update->getAttachedTo()?></dd>
                                 </dl>
                             </li>
                             <?php } ?>
-
-                            <li>
-                                <dl>
-                                    <dt>Update:</dt>
-                                    <dd><?=date('d.m.Y, H:i:s', $update->getUpdatedAsTimestamp())?></dd>
-                                </dl>
-                            </li>
                         </ul>
                     </div>
                 </div>

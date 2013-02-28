@@ -46,3 +46,8 @@ ul.ticketinfo li dl dt {
 ul.ticketinfo li dl dd {
     position:relative;
 }
+
+ul.ticketinfo li.highlight dd {
+    font-size: 1em;
+    font-weight: 500;
+}
