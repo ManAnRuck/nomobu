@@ -89,9 +89,13 @@
                 <hr>
                 <div class="row-fluid">
                     <div class="span9">
+                        <?php if(trim($update->getDescriptionParsed()) != '') {
+                        ?>
                         <div class="well well-small">
                             <?=$update->getDescriptionParsed()?>
                         </div>
+                        <?php
+                        } ?>
                     </div>
 
                     <div class="span3">
