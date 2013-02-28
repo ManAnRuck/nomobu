@@ -43,18 +43,15 @@ class Application_Model_Update extends CD_Model {
     public function save() {
         parent::save();
         $ticket = $this->getTicket();
-        $save = false;
 
         if($this->states_id AND $this->states_id != '' AND $this->states_id != 0) {
             $ticket->states_id = $this->states_id;
-            $save = true;
         }
 
         if($this->attached_to AND $this->attached_to != '' AND $this->attached_to != 0) {
             $ticket->attached_to = $this->attached_to;
-            $save = true;
         }
 
-        if($save) $ticket->save();
+        $ticket->save();
     }
 }

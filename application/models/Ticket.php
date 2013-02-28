@@ -46,10 +46,7 @@ class Application_Model_Ticket extends CD_Model {
     }
 
     public function getUpdatedAsTimestamp() {
-        if(count($this->getUpdates()) <= 0) return parent::getUpdatedAsTimestamp();
-        $updates = $this->getUpdates();
-        $updates = array_reverse($updates);
-        return $updates[0]->getUpdatedAsTimestamp();
+        return parent::getUpdatedAsTimestamp();
     }
 
     public function getDescriptionParsed() {
