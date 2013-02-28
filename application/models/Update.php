@@ -30,4 +30,8 @@ class Application_Model_Update extends CD_Model {
         if(!$this->states_id OR $this->states_id == '') return null;
         return new Application_Model_Status($this->states_id);
     }
+
+    public function getDescriptionParsed() {
+        return nl2br($this->description);
+    }
 }

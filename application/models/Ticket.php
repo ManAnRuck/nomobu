@@ -54,4 +54,8 @@ class Application_Model_Ticket extends CD_Model {
         $updates = array_reverse($updates);
         return $updates[0]->getUpdatedAsTimestamp();
     }
+
+    public function getDescriptionParsed() {
+        return nl2br($this->description);
+    }
 }
