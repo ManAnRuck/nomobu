@@ -14,7 +14,9 @@ class Application_Model_Ticket extends CD_Model {
         'name'              =>  'Name',
         'description'       =>  'Description',
         'states_id'         =>  'State',
-        'projects_id'       =>  'Project'
+        'projects_id'       =>  'Project',
+        'attached_to'       =>  'Attached to',
+        'author'            =>  'Author'
     );
 
     protected $_foreignKeys = array(
