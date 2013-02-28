@@ -7,7 +7,7 @@
                 }
             ?>
 
-            <h2>[#<?=$this->item->id?>] <?=$this->item?></h2>
+            <h2>[<?=$this->item->getType()?> #<?=$this->item->id?>] <?=$this->item?></h2>
         </div>
     </div>
 
@@ -24,6 +24,15 @@
                     <dl>
                         <dt>Project:</dt>
                         <dd><?=$this->item->getProject()?></dd>
+                    </dl>
+                </li>
+
+                <li>
+                    <dl>
+                        <dt>Type:</dt>
+                        <dd>
+                            <?=$this->item->getType()?>
+                        </dd>
                     </dl>
                 </li>
 

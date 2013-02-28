@@ -15,17 +15,8 @@
                         <th class="tiny">
                             #
                         </th>
-                        <th class="tiny">
-                            Type
-                        </th>
-                        <th class="medium">
-                            State
-                        </th>
                         <th class="main">
                             Name
-                        </th>
-                        <th class="medium">
-                            Last Update
                         </th>
                         <th class="tiny">
                             Actions
@@ -40,26 +31,16 @@
                                 /** @var $item Application_Model_Article */
                                 foreach($this->items as $item) {
                                     ?>
-                                        <tr class="<?php if($item->getState()->closes == 1) { echo 'fadeout'; } ?>">
+                                        <tr>
                                             <td>
                                                 <?=$item->id?>
                                             </td>
                                             <td>
-                                                <?=$item->getType()?>
+                                                <a href="<?=$this->baseUrl();?>/<?=Zend_Controller_Front::getInstance()->getRequest()->getControllerName()?>/edit/id/<?=$item->id?>"><?=$item?></a>
                                             </td>
                                             <td>
-                                                <?=$item->getState()?>
-                                            </td>
-                                            <td>
-                                                <a href="<?=$this->baseUrl();?>/<?=Zend_Controller_Front::getInstance()->getRequest()->getControllerName()?>/view/id/<?=$item->id?>">
-                                                    <?=$item?>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <?=date('d.m.Y, H:i:s', $item->getUpdatedAsTimestamp())?>
-                                            </td>
-                                            <td>
-                                                <a href="<?=$this->baseUrl();?>/<?=Zend_Controller_Front::getInstance()->getRequest()->getControllerName()?>/view/id/<?=$item->id?>"><i class="icon-eye-open"></i></a>
+                                                <a href="<?=$this->baseUrl();?>/<?=Zend_Controller_Front::getInstance()->getRequest()->getControllerName()?>/edit/id/<?=$item->id?>"><i class="icon-edit"></i></a>
+                                                <a href="<?=$this->baseUrl();?>/<?=Zend_Controller_Front::getInstance()->getRequest()->getControllerName()?>/deactivate/id/<?=$item->id?>"><i class="icon-remove"></i></a>
                                             </td>
                                         </tr>
                                     <?php

@@ -16,14 +16,16 @@ class Application_Model_Ticket extends CD_Model {
         'states_id'         =>  'State',
         'projects_id'       =>  'Project',
         'attached_to'       =>  'Attached to',
-        'author'            =>  'Author'
+        'author'            =>  'Author',
+        'types_id'          =>  'Type'
     );
 
     protected $_foreignKeys = array(
         'states_id'         =>  'Application_Model_Status',
         'projects_id'       =>  'Application_Model_Project',
         'author'            =>  'Application_Model_User',
-        'attached_to'       =>  'Application_Model_User'
+        'attached_to'       =>  'Application_Model_User',
+        'types_id'          =>  'Application_Model_Type'
     );
 
     public function getProject() {
@@ -53,5 +55,9 @@ class Application_Model_Ticket extends CD_Model {
 
     public function getDescriptionParsed() {
         return nl2br($this->description);
+    }
+
+    public function getType() {
+        return new Application_Model_Type($this->types_id);
     }
 }
