@@ -51,3 +51,38 @@ ul.ticketinfo li.highlight dd {
     font-size: 1em;
     font-weight: 500;
 }
+
+.install .container-fluid {
+    max-width:480px;
+    margin:1em auto;
+}
+
+.install dl {
+    margin:0;
+    padding:0;
+}
+
+.install dd.result {
+    width:100%;
+    display:block;
+    clear:both;
+    margin:0;
+    padding:0;
+    padding:1em 0 0;
+}
+
+.install ul {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
+
+.install ul li {
+    margin-bottom: 0.5em;
+}
+
+.install .header {
+    font-weight: 500;
+    padding:1em;
+
+}

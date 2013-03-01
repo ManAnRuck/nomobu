@@ -1,0 +1,55 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <h1>nomobu installer</h1>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12 well well-small">
+
+            <p class="header">
+                The installer has checked your system to match minimal system requirements. This is the result:
+            </p>
+
+            <ul>
+                <?php
+                    if($this->configWritable) {
+                        $class = 'alert-success';
+                    } else {
+                        $class = 'alert-error';
+                    }
+                ?>
+                <li class="clearfix <?=$class?> alert">
+                    <dl>
+                        <dt class="pull-left">Config file writeable</dt>
+                        <dd class="pull-right">
+                            <?php
+                                if($this->configWritable) {
+                                    echo 'Yes';
+                                } else {
+                                    echo 'No';
+                                }
+                            ?>
+                        </dd>
+                        <?php
+                            if(!$this->configWritable) {
+                                ?>
+                                <dd class="result">Make sure your config file is writeable. You can find it at <code>./application/configs/application.ini</code></dd>
+                                <?php
+                            }
+                        ?>
+                    </dl>
+                </li>
+            </ul>
+
+            <?php
+                if($this->continue) {
+                    ?><a href="<?=$this->baseUrl()?>/install/database" class="btn btn-primary pull-right">Continue »</a><?php
+                } else {
+                    ?><span class="btn btn-primary disabled pull-right">Continue »</span><?php
+                }
+            ?>
+        </div>
+    </div>
+</div>

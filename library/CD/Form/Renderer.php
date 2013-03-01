@@ -24,7 +24,9 @@ class CD_Form_Renderer {
             $return.= $add.PHP_EOL;
         }
 
-        $return = '<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">'.PHP_EOL. $return .PHP_EOL. '</form>';
+        $action = $form->getAction();
+
+        $return = '<form class="form-horizontal" method="post" action="'.$action.'" enctype="multipart/form-data">'.PHP_EOL. $return .PHP_EOL. '</form>';
 
         return $return;
     }
