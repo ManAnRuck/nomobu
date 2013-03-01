@@ -25,7 +25,7 @@ class CD_Model {
     /**
      * @var array Array with keys which will be ignored while saving
      */
-    protected $_ignoreKeys = array('id');
+    protected $_ignoreKeys = array('id', 'system');
 
     /**
      * @var array Array with keys which will be ignored while generating form
