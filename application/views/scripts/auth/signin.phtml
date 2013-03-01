@@ -1,0 +1,12 @@
+<div class="container-fluid login">
+    <div class="row-fluid">
+        <div class="span6 offset3">
+            <?php
+                if(count(CD_Message_Center::getInstance()->getMessages()) > 0) {
+                    echo CD_Message_Center::getInstance()->flush();
+                }
+            ?>
+            <?=CD_Form_Renderer::render($this->signinForm)?>
+        </div>
+    </div>
+</div>

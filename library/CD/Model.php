@@ -30,7 +30,7 @@ class CD_Model {
     /**
      * @var array Array with keys which will be ignored while generating form
      */
-    protected $_ignoreInForms = array('updated');
+    protected $_ignoreInForms = array('updated', 'created');
 
     /**
      * @var array Fieldname mapper
@@ -93,6 +93,7 @@ class CD_Model {
     	if($this->id AND $this->id !== null AND $this->id != '') {
     		$this->getMapper()->getTable()->update($data, array('id = ?' => $this->id));
     	} else {
+            if($this->_hasField('created')) $data['created'] = date('Y-m-d H:i:s');
     		$this->id = $this->getMapper()->getTable()->insert($data);
     	}
     }
@@ -223,6 +224,11 @@ class CD_Model {
 
     public function getUpdatedAsTimestamp() {
         if($this->_hasUpdate()) return strtotime($this->updated);
+        return null;
+    }
+
+    public function getCreatedAsTimestamp() {
+        if($this->_hasField('created')) return strtotime($this->created);
         return null;
     }
 }

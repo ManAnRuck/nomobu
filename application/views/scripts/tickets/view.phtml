@@ -38,6 +38,32 @@
 
                 <li>
                     <dl>
+                        <dt>Author:</dt>
+                        <dd><?=$this->item->getAuthor()?></dd>
+                    </dl>
+                </li>
+
+                <li>
+                    <dl>
+                        <dt>Attached to:</dt>
+                        <dd>
+                            <?=$this->item->getAttachedTo()?>
+                            <a href="#" data-toggle="dropdown"><i class="icon-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <?php
+                                foreach($this->users as $user) {
+                                    ?><li><a href="<?=$this->baseUrl();?>/tickets/assign/id/<?=$this->item->id?>/userId/<?=$user->id?>"><?=$user?></a></li><?php
+                                }
+                                ?>
+                                <li class="divider"></li>
+                                <li><a href="#">Mir zuweisen</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li>
+                    <dl>
                         <dt>State:</dt>
                         <dd><?=$this->item->getState()?>
                             <a href="#" data-toggle="dropdown"><i class="icon-chevron-down"></i></a>
@@ -54,27 +80,8 @@
 
                 <li>
                     <dl>
-                        <dt>Author:</dt>
-                        <dd><?=$this->item->getAuthor()?></dd>
-                    </dl>
-                </li>
-
-                <li>
-                    <dl>
-                        <dt>Attached to:</dt>
-                        <dd>
-                            <?=$this->item->getAttachedTo()?>
-                            <a href="#" data-toggle="dropdown"><i class="icon-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <?php
-                                    foreach($this->users as $user) {
-                                        ?><li><a href="<?=$this->baseUrl();?>/tickets/assign/id/<?=$this->item->id?>/userId/<?=$user->id?>"><?=$user?></a></li><?php
-                                    }
-                                ?>
-                                <li class="divider"></li>
-                                <li><a href="#">Mir zuweisen</a></li>
-                            </ul>
-                        </dd>
+                        <dt>Created:</dt>
+                        <dd><?=date('d.m.Y, H:i:s', $this->item->getCreatedAsTimestamp())?></dd>
                     </dl>
                 </li>
 
