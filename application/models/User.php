@@ -17,7 +17,7 @@ class Application_Model_User extends CD_Model {
     public function save() {
         if(trim($this->password) == '') {
             unset($this->password);
-        } elseif(!isset($this->_original['password']) OR $this->password != $this->_original['password']) {
+        } elseif(!$this->id OR !isset($this->_original['password']) OR $this->password != $this->_original['password']) {
             $this->password = md5($this->password);
         }
 

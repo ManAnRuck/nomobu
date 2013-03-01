@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <h1>nomobu installer</h1>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12 well well-small clearfix">
+
+            <p class="header">
+                Please provide information for an admin user:
+            </p>
+
+            <?php
+            if(count(CD_Message_Center::getInstance()->getMessages()) > 0) {
+                echo CD_Message_Center::getInstance()->flush();
+            }
+            ?>
+
+            <?=CD_Form_Renderer::render($this->form)?>
+
+            <a href="#" class="btn btn-primary pull-right" onclick="document.forms[0].submit(); return false;">Continue »</a>
+        </div>
+    </div>
+</div>
