@@ -40,6 +40,9 @@ class TicketsController extends CD_Controller_Admin {
         $states = $statesModel->getMapper()->fetchAll();
         $this->view->states = $states;
 
+
+        $this->view->headTitle('['.$item->getType()->__toString().' #'.$item->id .'] '.$item->__toString());
+        $this->view->headTitle($item->getProject());
         $this->view->item = $item;
     }
 
