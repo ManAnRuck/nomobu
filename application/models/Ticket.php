@@ -37,7 +37,7 @@ class Application_Model_Ticket extends CD_Model {
     }
 
     public function getAuthor() {
-        return new Application_Model_User($this->author);
+        return new Application_Model_User($this->created_by);
     }
 
     public function getAttachedTo() {

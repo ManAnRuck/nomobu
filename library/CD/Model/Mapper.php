@@ -48,4 +48,18 @@ class CD_Model_Mapper {
     	
     	return $return;
     }
+
+    public function fetchRow($where = null, $order = null, $count = null) {
+        $modelName = get_class($this->_model);
+        $item = $this->getTable()->fetchRow($where, $order, $count);
+
+        if(!$item) return null;
+
+        $return = new $modelName;
+        foreach($item as $key => $value) {
+            $return->{$key} = $value;
+        }
+
+        return $return;
+    }
 }

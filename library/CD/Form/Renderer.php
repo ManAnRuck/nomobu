@@ -33,6 +33,8 @@ class CD_Form_Renderer {
         $return = 'NO TYPE';
         if($element->getType() == 'Zend_Form_Element_Text') {
             $return = '<input '.self::renderAttributes($element).' value="'.$element->getValue().'" placeholder="'.$element->getLabel().'">';
+        } elseif($element->getType() == 'Zend_Form_Element_Password') {
+            $return = '<input '.self::renderAttributes($element).' value="'.$element->getValue().'" placeholder="'.$element->getLabel().'">';
         } elseif($element->getType() == 'Zend_Form_Element_Submit') {
             $return = '<button class="btn btn-primary">'.$element->getLabel().'</button>';
         } elseif($element->getType() == 'Zend_Form_Element_Textarea') {
@@ -84,7 +86,9 @@ class CD_Form_Renderer {
     public function renderAttributes(Zend_Form_Element $element) {
         if($element->getType() == 'Zend_Form_Element_Textarea' AND $element->getValue() != '') {
             $return = 'id="'. $element->getName() .'" rows="'. (strlen($element->getValue()) / 100) .'" class="input-block-level" type="text" name="'.$element->getName().'"';
-        } else {
+        } elseif($element->getType() == 'Zend_Form_Element_Password') {
+            $return = 'id="'. $element->getName() .'" class="input-block-level" type="password" name="'.$element->getName().'"';
+        }else {
             $return = 'id="'. $element->getName() .'" class="input-block-level" type="text" name="'.$element->getName().'"';
         }
 

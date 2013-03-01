@@ -30,7 +30,7 @@ class CD_Model {
     /**
      * @var array Array with keys which will be ignored while generating form
      */
-    protected $_ignoreInForms = array('updated');
+    protected $_ignoreInForms = array('updated', 'created', 'created_by');
 
     /**
      * @var array Fieldname mapper
@@ -43,6 +43,8 @@ class CD_Model {
     protected $_foreignKeys = array();
 
     protected $_specialFields = array();
+
+    protected $_original = array();
 
     /**
      * Ctor
@@ -93,6 +95,8 @@ class CD_Model {
     	if($this->id AND $this->id !== null AND $this->id != '') {
     		$this->getMapper()->getTable()->update($data, array('id = ?' => $this->id));
     	} else {
+            if($this->_hasField('created_by') && Zend_Registry::get('user')) $data['created_by'] = Zend_Registry::get('user')->id;
+            if($this->_hasField('created')) $data['created'] = date('Y-m-d H:i:s');
     		$this->id = $this->getMapper()->getTable()->insert($data);
     	}
     }
@@ -224,5 +228,20 @@ class CD_Model {
     public function getUpdatedAsTimestamp() {
         if($this->_hasUpdate()) return strtotime($this->updated);
         return null;
+    }
+
+    public function getCreatedAsTimestamp() {
+        if($this->_hasField('created')) return strtotime($this->created);
+        return null;
+    }
+
+    public function __set($key, $value) {
+        if(!isset($this->_original[$key])) $this->_original[$key] = $value;
+        $this->{$key} = $value;
+    }
+
+    public function getCreatedBy() {
+        if(!$this->_hasField('created_by')) throw new Exception('Field created_by not in model');
+        return new Application_Model_User($this->created_by);
     }
 }
