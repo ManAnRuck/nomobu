@@ -10,8 +10,6 @@ class AuthController extends Zend_Controller_Action {
     public function indexAction() {
         if(!Zend_Registry::get('user')) {
             return $this->forward('signin');
-        } else {
-            return $this->forward('signout');
         }
     }
 
@@ -39,6 +37,21 @@ class AuthController extends Zend_Controller_Action {
         if($this->getRequest()->isPost()) {
             if($form->isValid($this->getRequest()->getPost())) {
                 // echo 'valid';
+                $userModel = new Application_Model_User();
+                $user = $userModel->getMapper()->fetchRow(array(
+                    'email = ?'     => $this->getRequest()->getParam('email'),
+                    'password = ?'  => md5($this->getRequest()->getParam('password'))
+                ));
+
+                if(!$user) {
+                    CD_Message_Center::getInstance()->addMessage(new CD_Message_Error('Wrong credentials'));
+                } else {
+                    $session = new Zend_Session_Namespace('nomobu');
+                    $session->user = $user;
+                    Zend_Registry::set('user', $user);
+                    return $this->forward('index', 'tickets');
+                }
+
             } else {
                 // echo 'invalid';
                 CD_Message_Center::getInstance()->addMessage(new CD_Message_Error('Please check the highlighted fields'));
@@ -48,5 +61,11 @@ class AuthController extends Zend_Controller_Action {
         $this->view->signinForm = $form;
     }
 
-    public function signoutAction() {}
+    public function signoutAction() {
+        $session = new Zend_Session_Namespace('nomobu');
+        unset($session->user);
+        Zend_Registry::set('user', null);
+
+        return $this->forward('index', 'tickets');
+    }
 }
